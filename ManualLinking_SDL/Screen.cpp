@@ -50,22 +50,20 @@ bool caveofprogramming::Screen::init()
 	// by initializing array pointer which stores 32bit integer corresponding to each pixel
 	m_buffer = new Uint32[ScreenWidth * ScreenHeight];
 
-	return false;
 }
 
 void caveofprogramming::Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
 {
 	Uint32 color = 0;
-
-	color += red;
-	color <= 8;
-	color += green;
-	color <= 8;
-	color += blue;
-	color <= 8;
 	color += 0xff;
+	color <<= 8;
+	color += blue;
+	color <<= 8;
+	color += green;
+	color <<= 8;
+	color += red;
 
-	m_buffer[(y * ScreenWidth) + x] = color;
+	m_buffer[(y * ScreenWidth) + x] = color; //works in order as Abgr
 }
 
 void caveofprogramming::Screen::update()

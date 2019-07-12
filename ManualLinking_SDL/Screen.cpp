@@ -1,6 +1,6 @@
 #include "Screen.h"
 
-caveofprogramming::Screen::Screen() :
+caveofprogramming::Screen::Screen() : //defining constructor
 	m_window(NULL), m_renderer(NULL), m_texture(NULL), m_buffer(NULL) {
 }
 
@@ -47,15 +47,8 @@ bool caveofprogramming::Screen::init()
 		return false;
 	}
 	//Create a memory buffer for renderer color, RGBA, each channel takes 4 bytes=32bits
+	// by initializing array pointer which stores 32bit integer corresponding to each pixel
 	m_buffer = new Uint32[ScreenWidth * ScreenHeight];
-
-	for (size_t i = 0; i < ScreenWidth * ScreenHeight; i++)
-	{
-		m_buffer[i] = 0xff880ff;
-	}
-
-
-
 
 	return false;
 }

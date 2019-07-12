@@ -3,7 +3,7 @@ namespace caveofprogramming {
 	class Screen
 	{
 	public:
-		const static int ScreenWidth = 800;
+		const static int ScreenWidth = 800; // # pixels
 		const static int ScreenHeight = 600;
 	private:
 		SDL_Window* m_window;

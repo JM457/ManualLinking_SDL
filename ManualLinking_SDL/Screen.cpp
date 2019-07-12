@@ -54,6 +54,10 @@ bool caveofprogramming::Screen::init()
 
 void caveofprogramming::Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
 {
+	if (x<0 ||x>ScreenWidth || y<0 ||y>ScreenHeight)
+	{
+		return;
+	}
 	Uint32 color = 0;
 	color += 0xff;
 	color <<= 8;

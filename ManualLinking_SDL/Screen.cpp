@@ -60,7 +60,7 @@ bool caveofprogramming::Screen::init()
 	return false;
 }
 
-void caveofprogramming::Screen::setPixel()
+void caveofprogramming::Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
 {
 	Uint32 color = 0;
 
@@ -70,9 +70,9 @@ void caveofprogramming::Screen::setPixel()
 	color <= 8;
 	color += blue;
 	color <= 8;
-	color += ff;
+	color += 0xff;
 
-	m_buffer[]
+	m_buffer[(y * ScreenWidth) + x] = color;
 }
 
 void caveofprogramming::Screen::update()

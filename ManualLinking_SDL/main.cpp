@@ -12,7 +12,7 @@ using namespace caveofprogramming;
 int main(int argc, char* argv[]) {
 
 	srand(time(NULL));
-
+	
 	Screen screen;
 	if (screen.init() == false) {
 		cout << "error in initializing SDL" << endl;
@@ -20,9 +20,20 @@ int main(int argc, char* argv[]) {
 
 	Swarm swarm;
 
+	
+
 	while (true)
 	{
 		// update particles
+		
+	    //animate color
+		int elapsed = SDL_GetTicks();
+		swarm.update();
+		unsigned char green = (unsigned char((1 + sin(elapsed * 0.0004)) * 128));
+		unsigned char red = (unsigned char((1 + cos(elapsed * 0.0002)) * 128));
+		unsigned char blue = (unsigned char((1 + sin(elapsed * 0.0001)) * 128));
+
+
 		//draw particles
 		const Particle* const pParticle = swarm.getParticle();
 		for (size_t i = 0; i < Swarm::NPARTICLES; i++)
@@ -30,24 +41,8 @@ int main(int argc, char* argv[]) {
 			Particle particle = pParticle[i];
 			int x = (particle.m_x + 1) * Screen::ScreenWidth/2;
 			int y = (particle.m_y + 1) * Screen::ScreenHeight/2;
-			screen.setPixel(x, y, Uint8(255), Uint8(255), Uint8(255));
+			screen.setPixel(x, y, red, green,blue);
 		}
-
-		/*		//animate screen
-		int elapsed = SDL_GetTicks();
-		Uint8 green = (ceil((1+sin(elapsed*0.0004)) * 128));
-	    Uint8 red = (ceil((1 + cos(elapsed * 0.0002)) * 128));
-	    Uint8 blue = (ceil((1 + sin(elapsed * 0.0001)) * 128));
-	
-
-		for (size_t y = 0; y <Screen::ScreenHeight ; y++)
-		{
-			for (size_t x = 0; x < Screen::ScreenWidth; x++)
-			{
-				screen.setPixel(x, y, red, green, blue);
-			}
-		}
-		*/
 
 		// update screen
 		screen.update();

@@ -1,4 +1,6 @@
 #include "Screen.h"
+#include<iostream>
+#include<SDL.h>
 
 caveofprogramming::Screen::Screen() : //defining constructor
 	m_window(NULL), m_renderer(NULL), m_texture(NULL), m_buffer(NULL) {
@@ -16,6 +18,10 @@ bool caveofprogramming::Screen::init()
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		ScreenWidth, ScreenHeight,
 		SDL_WINDOW_SHOWN);
+
+
+
+
 	//Check if initialized
 	if (m_window == NULL)
 	{
@@ -49,12 +55,14 @@ bool caveofprogramming::Screen::init()
 	//Create a memory buffer for renderer color, RGBA, each channel takes 4 bytes=32bits
 	// by initializing array pointer which stores 32bit integer corresponding to each pixel
 	m_buffer = new Uint32[ScreenWidth * ScreenHeight];
+	//set all memory to 0=black, each pixel contains 4bytes=sizeof(Uint32)
+	memset(m_buffer, Uint8(0), (ScreenWidth * ScreenHeight) * sizeof(Uint32)); 
 
 }
 
 void caveofprogramming::Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
 {
-	if (x<0 ||x>ScreenWidth || y<0 ||y>ScreenHeight)
+	if ((x <= 0 ||x >= ScreenWidth) || (y <= 0 ||y >= ScreenHeight))
 	{
 		return;
 	}
@@ -67,6 +75,7 @@ void caveofprogramming::Screen::setPixel(int x, int y, Uint8 red, Uint8 green, U
 	color <<= 8;
 	color += red;
 
+	// length of m_buffer = (ScreenWidth * ScreenHeight) * sizeof(Uint32)
 	m_buffer[(y * ScreenWidth) + x] = color; //works in order as Abgr
 }
 

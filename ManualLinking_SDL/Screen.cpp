@@ -67,7 +67,7 @@ void caveofprogramming::Screen::setPixel(int x, int y, Uint8 red, Uint8 green, U
 		return;
 	}
 	Uint32 color = 0;
-	color += 0xff;
+	color += 0xff; 
 	color <<= 8;
 	color += blue;
 	color <<= 8;
@@ -108,4 +108,9 @@ void caveofprogramming::Screen::close()
 	SDL_DestroyWindow(m_window);
 	SDL_Quit();
 	
+}
+
+void caveofprogramming::Screen::clear()
+{	//set all memory to 0=black, each pixel contains 4bytes=sizeof(Uint32)
+	memset(m_buffer, Uint8(0), (ScreenWidth * ScreenHeight) * sizeof(Uint32));
 }

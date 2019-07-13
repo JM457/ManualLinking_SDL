@@ -28,6 +28,7 @@ int main(int argc, char* argv[]) {
 		
 	    //animate color
 		int elapsed = SDL_GetTicks();
+		screen.clear();
 		swarm.update();
 		unsigned char green = (unsigned char((1 + sin(elapsed * 0.0004)) * 128));
 		unsigned char red = (unsigned char((1 + cos(elapsed * 0.0002)) * 128));
@@ -40,7 +41,7 @@ int main(int argc, char* argv[]) {
 		{
 			Particle particle = pParticle[i];
 			int x = (particle.m_x + 1) * Screen::ScreenWidth/2;
-			int y = (particle.m_y + 1) * Screen::ScreenHeight/2;
+			int y = (particle.m_y  * Screen::ScreenWidth / 2) + (Screen::ScreenHeight/2);
 			screen.setPixel(x, y, red, green,blue);
 		}
 

@@ -17,5 +17,6 @@ namespace caveofprogramming {
 		void update();
 		bool ProcessEvents();
 		void close();
+		void clear();
 	};
 }
